@@ -70,16 +70,21 @@ for oFile in O_files:
         #encontrar Thetha
         THETHA = math.atan((Z*a) / (P*b))
         #encontrar phi
-        PHI = math.atan( (Z + ( math.pow(ext[0], 2)*b*math.pow( math.sin(THETHA),3) ) )/(P - (math.pow(ext[1],2) * a * math.pow(math.cos(THETHA),3))) )
+        #PHI = math.atan( (Z + ( math.pow(ext[0], 2)*b*math.pow( math.sin(THETHA),3) ) )/(P - (math.pow(ext[1],2) * a * math.pow(math.cos(THETHA),3))) )
+        PHI = math.atan((Z + ext[1] *b*math.pow( math.sin(THETHA),3) )/(P - ext[0] * a * math.pow(math.cos(THETHA),3)))
         #encontrar el gran normal
-        N = ( (a) / (math.sqrt( 1 - ( math.pow(ext[1], 2) * math.pow(math.sin(PHI),2) ) ) ) )
+        #N = ( (a) / (math.sqrt( 1 - ( math.pow(ext[1], 2) * math.pow(math.sin(PHI),2) ) ) ) ) ##Esta fórmula está mala
+        N = a / (math.sqrt(1-(ext[0])*(math.sin(PHI)**2)))
         #encontrar altura
         H = ( ( P / math.cos(PHI) ) - N)
+        #Convertir a grados
+        LAM_deg = math.degrees(LAM)
+        PHI_deg = math.degrees(PHI)
         print("----------------------------------------")
         #print("Radio:", P)
-        print("Lamda:", LAM)
+        print("Lamda:", LAM_deg)
         #print("Thetha", THETHA)
-        print("Phi:", PHI)
+        print("Phi:", PHI_deg)
         #print("N", N)
         print("Altura:", H)
         print("X: ", X, "Y: ", Y, "Z:", Z)
